@@ -23,6 +23,7 @@ let AddProjectPage = class extends Component {
 };
 
 export default AddProjectPage = connect(mapStateToProps, {
+  alphAction,
   postProject,
   remoteSubmit,
 })(AddProjectPage);
