@@ -1,4 +1,4 @@
-const mergeAppendedImports = (blockArr, appendedArr) => {
+const mergeAppendedPoperties = (blockArr, appendedArr) => {
   const firstLine = blockArr[0];
   const lastLine = blockArr[blockArr.length - 1];
 
@@ -9,15 +9,14 @@ const mergeAppendedImports = (blockArr, appendedArr) => {
   ];
 }
 
-const appendArrAlphabetically = (arr, index, newVal) => {
-  const clone = [...arr];
-  clone.splice(index, 0, newVal);
-  const sortedClone = clone.sort();
+const appendArrAlphabetically = (arr, newVal) => {
+  const appendedArr = [...arr, newVal];
+  const sortedArr = appendedArr.sort();
 
-  return sortedClone;
+  return sortedArr;
 };
 
-const extractImports = importBlockArr => (
+const extractProperties = importBlockArr => (
   importBlockArr.filter((line, index) => (
     (index !== 0) && (index !== importBlockArr.length -1)
   ))
@@ -33,14 +32,14 @@ const getRegexMatch = (regex) => (string) => (
   regex.exec(string)[0]
 );
 
-const getNewImportBlock = (targetBlock, fileName, newActionName) => {
+const getAppendedDestructureBlock  = (targetBlock, newActionName) => {
   const targetBlockArr = (
     targetBlock.split('\n')
   );
-  const imports = extractImports(targetBlockArr);
-  const appendedImports = appendArrAlphabetically(imports, 1, newActionName);
+  const imports = extractProperties(targetBlockArr);
+  const appendedImports = appendArrAlphabetically(imports, newActionName);
   const newImportBlock = (
-    mergeAppendedImports(targetBlockArr, appendedImports).join('\n')
+    mergeAppendedPoperties(targetBlockArr, appendedImports).join('\n')
   );
 
   return newImportBlock;
@@ -48,9 +47,8 @@ const getNewImportBlock = (targetBlock, fileName, newActionName) => {
 
 module.exports = {
   appendArrAlphabetically,
-  extractImports,
+  extractProperties,
   getImportBlockRegex,
-  getNewImportBlock,
+  getAppendedDestructureBlock  ,
   getRegexMatch,
-  mergeAppendedImports,
 }

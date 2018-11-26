@@ -1,22 +1,20 @@
 const {
-  mergeAppendedImports,
   appendArrAlphabetically,
-  extractImports,
+  extractProperties,
   getImportBlockRegex,
   getRegexMatch,
-  getNewImportBlock,
+  getAppendedDestructureBlock  ,
 } = require('./utils');
-
 
 const appendImportBlock = (blockType) => (actionName) => (fileText) => {
   const getTargetImportBlock = getImportBlockRegex(blockType);
   const getImportBlock = getRegexMatch(getTargetImportBlock());
-  const ImportBlock = getImportBlock(fileText);
+  const importBlock = getImportBlock(fileText);
   const appendedImportBlock = (
-     getNewImportBlock(ImportBlock, blockType, actionName)
+     getAppendedDestructureBlock (importBlock, actionName)
   );
 
-  const newText = fileText.replace(ImportBlock, appendedImportBlock);
+  const newText = fileText.replace(importBlock, appendedImportBlock);
 
   return newText;
 }

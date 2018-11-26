@@ -1,8 +1,8 @@
 const fs = require('fs');
 
-const editFile = (callback) => {
+const editFile = (fileName, callback) => {
   let fileString = "";
-  fs.readFile('App.js', 'utf8', (err, data) => {
+  fs.readFile(fileName, 'utf8', (err, data) => {
     if (err) throw err;
     fileString += data;
 
