@@ -6,6 +6,12 @@ import {
   remoteSubmit,
 } from '../actions/indexActions';
 
+import {
+  alphAction,
+  postProject,
+  remoteSubmit,
+} from '../sagas/indexActions';
+
 let AddProjectPage = class extends Component {
   render() {
     return (

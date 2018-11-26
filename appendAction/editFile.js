@@ -1,7 +1,5 @@
 const fs = require('fs');
 
-const appendActionBlock = require('./appendActionBlock');
-
 const editFile = (callback) => {
   let fileString = "";
   fs.readFile('App.js', 'utf8', (err, data) => {
@@ -13,4 +11,4 @@ const editFile = (callback) => {
   });
 }
 
-editFile(appendActionBlock('  newAction'));
+module.exports = editFile;
