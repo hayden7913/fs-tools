@@ -1,16 +1,6 @@
+// try to just replace merged actions
+
 const fs = require('fs');
-
-const appendString = (str, value, position,) => (
-  [str.slice(0, position), value, str.slice(position)].join('')
-);
-
-const appendAfterMatch = (regex, str, newText ) => {
-  const target = regex.exec(str);
-  const insertPosition = target.index + target[0].length;
-  const newString = appendString(str, newText, insertPosition);
-
-  return newString;
-};
 
 const mergeAppndedActions = (blockArr, appendedArr) => {
   const firstLine = blockArr[0];
@@ -52,12 +42,6 @@ const getImportBlockRegex = fileName => () => (
 
 const getActionBlockRegex = getImportBlockRegex('actions');
 
-const filterTargetBlock = (importBlocks, fileName) => {
-  const containsFileName = containsWord(fileName);
-  return importBlocks .split('\n\n')
-    .filter(containsFileName)[0]
-}
-
 const getRegexMatch = (regex) => (string) => (
   regex.exec(string)[0]
 );
@@ -76,7 +60,6 @@ const getNewImportBlock = (fileString, fileName, newActionName) => {
 
   return newImportBlock;
 };
-
 
 const appendActionBlock = (actionName) => (fileText) => {
   const actionBlock = getActionBlock(fileText);
